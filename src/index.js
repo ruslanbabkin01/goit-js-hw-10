@@ -26,14 +26,16 @@ function onInput(evt) {
 function addMarkup(name) {
   const quantityCountries = name.length;
 
-  appendMiniMarkup(name);
-
-  if (quantityCountries > 10 && quantityCountries > 2) {
-    Notify.info('Too many matches found. Please enter a more specific name.');
+  if (quantityCountries < 10 && quantityCountries > 2) {
+    appendMiniMarkup(name);
     return;
   }
   if (quantityCountries === 1) {
     appendTotalMarkup(name);
+    return;
+  }
+  if (quantityCountries > 10) {
+    Notify.info('Too many matches found. Please enter a more specific name.');
     return;
   }
 }
