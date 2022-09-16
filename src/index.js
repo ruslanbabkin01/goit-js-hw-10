@@ -16,11 +16,10 @@ refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 function onInput(evt) {
   const inputValue = evt.target.value.trim();
 
-  if (inputValue !== ' ') {
-    fetchArticles(inputValue).then(addMarkup).catch(onFetchError);
-    clearContainer();
+  if (inputValue === ' ') {
     return;
   }
+  fetchArticles(inputValue).then(addMarkup).catch(onFetchError);
   clearContainer();
 }
 
