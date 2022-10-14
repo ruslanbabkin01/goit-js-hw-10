@@ -1,15 +1,11 @@
 import './css/styles.css';
-import { fetchArticles } from './fetchCountries';
+import { fetchArticles } from './js/fetchCountries';
+import { refs } from './js/refs';
+import { appendTotalMarkup, appendMiniMarkup } from './js/appendMarkup';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const DEBOUNCE_DELAY = 300;
-
-const refs = {
-  input: document.querySelector('#search-box'),
-  listUl: document.querySelector('.country-list'),
-  divInfo: document.querySelector('.country-info'),
-};
 
 refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
@@ -38,35 +34,6 @@ function addMarkup(name) {
     Notify.info('Too many matches found. Please enter a more specific name.');
     return;
   }
-}
-
-function appendTotalMarkup(name) {
-  const markup = name
-    .map(({ name, flags, capital, population, languages }) => {
-      return `<li>
-      <h2><img width="35" height="25" src="${flags.svg}"</img>
-      ${name.official}</h2>
-      <p>Capital: ${capital[0]}</p>
-      <p>Population: ${population}</p>
-      <p>Languages: ${Object.values(languages)
-        .toString()
-        .split(',')
-        .join(', ')}</p>
-    </li> `;
-    })
-    .join('');
-  refs.listUl.innerHTML = markup;
-}
-
-function appendMiniMarkup(name) {
-  const markup = name
-    .map(({ name, flags }) => {
-      return `<li>
-      <h2><img width="35" height="25" src="${flags.svg}"</img>
-      ${name.official}</h2>`;
-    })
-    .join('');
-  refs.listUl.innerHTML = markup;
 }
 
 function onFetchError() {
