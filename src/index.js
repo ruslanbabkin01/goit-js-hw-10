@@ -1,4 +1,3 @@
-import './css/styles.css';
 import { fetchArticles } from './js/fetchCountries';
 import { refs } from './js/refs';
 import { appendTotalMarkup, appendMiniMarkup } from './js/appendMarkup';
